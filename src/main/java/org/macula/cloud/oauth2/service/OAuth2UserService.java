@@ -7,15 +7,12 @@ import org.macula.cloud.oauth2.repository.OAuth2UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.infinitusint.emp.sdk.adfs.dto.AccountInfo;
-
 import me.zhyd.oauth.model.AuthUser;
 
 @Service
 public class OAuth2UserService {
 
 	private boolean createAuthUser = true;
-	private boolean createAdfsUser = false;
 
 	@Autowired
 	private OAuth2UserRepository userRepository;
@@ -26,7 +23,7 @@ public class OAuth2UserService {
 			OAuth2User oauth2User = new OAuth2User();
 			oauth2User.setAccount(user.getUsername());
 			oauth2User.setUsername(user.getUsername());
-			oauth2User.setAvatarUrl(user.getAvatar());
+			oauth2User.setAvatar(user.getAvatar());
 			oauth2User.setGender(user.getGender().name());
 			oauth2User.setEmail(user.getEmail());
 			oauth2User.setRealname(user.getNickname());
@@ -36,13 +33,6 @@ public class OAuth2UserService {
 			userRepository.save(oauth2User);
 		}
 		return createAuthUser;
-	}
-
-	public boolean createAuthUser(AccountInfo credentials) {
-		if (createAdfsUser) {
-
-		}
-		return createAdfsUser;
 	}
 
 }

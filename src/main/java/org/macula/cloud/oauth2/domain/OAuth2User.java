@@ -35,13 +35,9 @@ public class OAuth2User extends AbstractAuditable<Long> implements Serializable 
 	@XmlTransient
 	private String password;
 
-	/** 用户类型 */
-	@Column(name = "USER_TYPE", length = 10, nullable = false)
-	private String userType = "USER";
-
 	/** 用户头像 */
-	@Column(name = "USER_AVATAR")
-	private String avatarUrl;
+	@Column(name = "AVATAR")
+	private String avatar;
 
 	/** 用户来源 */
 	@Column(name = "USER_SOURCE", length = 20, nullable = false)
@@ -52,20 +48,24 @@ public class OAuth2User extends AbstractAuditable<Long> implements Serializable 
 	private String account;
 
 	/** 用户姓名 */
-	@Column(name = "USER_REAL_NAME", length = 50, nullable = true)
+	@Column(name = "REAL_NAME", length = 50, nullable = true)
 	private String realname;
 
 	/** 用户别名 */
-	@Column(name = "USER_NICK_NAME", length = 150, nullable = true)
+	@Column(name = "NICK_NAME", length = 150, nullable = true)
 	private String nickname;
+
+	/** 用户所属公司 */
+	@Column(name = "COMPANY_CODE", length = 50, nullable = true)
+	private String companyCode;
 
 	/** 用户所属组织 */
 	@Column(name = "ORG_CODE", length = 50, nullable = true)
-	private String department;
+	private String orgCode;
 
 	/** 用户兼职组织 */
-	@Column(name = "PART_TIME_ORG_CODE", length = 50, nullable = true)
-	private String l2Department;
+	@Column(name = "L2_ORG_CODE", length = 50, nullable = true)
+	private String l2OrgCode;
 
 	/** 生效日期 */
 	@Column(name = "EFFECTIVE_DATE", nullable = false)
@@ -125,10 +125,6 @@ public class OAuth2User extends AbstractAuditable<Long> implements Serializable 
 	@Column(name = "EMAIL3", length = 50, nullable = true)
 	private String email3;
 
-	/** 即时通讯ID */
-	@Column(name = "IMID", length = 50, nullable = true)
-	private String imid;
-
 	@Column(name = "OFFICE_TITLE", length = 50, nullable = true)
 	private String officeTitle;
 
@@ -140,16 +136,24 @@ public class OAuth2User extends AbstractAuditable<Long> implements Serializable 
 	private String region;
 
 	/** 省 */
-	@Column(name = "STATE", length = 250, nullable = true)
-	private String state;
+	@Column(name = "PROVINCE", length = 250, nullable = true)
+	private String province;
 
-	/** 市县 */
+	/** 市 */
 	@Column(name = "CITY", length = 250, nullable = true)
 	private String city;
 
+	/** 区 */
+	@Column(name = "DISTRICT", length = 250, nullable = true)
+	private String district;
+
+	/** 镇 */
+	@Column(name = "TOWN", length = 250, nullable = true)
+	private String town;
+
 	/** 办公地点 */
-	@Column(name = "OFFICE_ADDR", length = 250, nullable = true)
-	private String officeAddress;
+	@Column(name = "ADDR", length = 250, nullable = true)
+	private String address;
 
 	/** 扩展字段 */
 	@Column(name = "FIELD1", length = 250, nullable = true)

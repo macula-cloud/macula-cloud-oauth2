@@ -14,7 +14,7 @@ spring:
    application:
       name: macula-cloud-oauth2
    profiles:
-      active: ${PROFILE_ACTIVE:test}
+      active: ${PROFILE_ACTIVE:default}
    cloud:
       config:
          discovery:
