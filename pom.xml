@@ -11,6 +11,7 @@
 
 	<artifactId>macula-cloud-oauth2</artifactId>
 	<name>macula-cloud-oauth2</name>
+	<version>latest</version>
 	<description>Macula Cloud OAuth2 Extension Project</description>
 
 	<properties>
@@ -21,17 +22,14 @@
 		<dependency>
 			<groupId>macula-cloud</groupId>
 			<artifactId>macula-cloud-starter-core</artifactId>
-			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>macula-cloud</groupId>
 			<artifactId>macula-cloud-starter-security</artifactId>
-			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>macula-cloud</groupId>
 			<artifactId>macula-cloud-starter-login</artifactId>
-			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>net.oschina.j2cache</groupId>
