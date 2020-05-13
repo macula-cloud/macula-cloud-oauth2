@@ -1,0 +1,24 @@
+srm:
+   uri: ${SRM_URL:http://10.86.21.74:8000/zrestsrvset/zsrmrest/check_login}
+   myappid: ${SRM_APPID:momo}
+   securitykey: ${SRM_APPKEY:JdW9Jxhm#%jWZj0Zo4mYOM$St^X^lVj$} #%jWZj0Zo4mYOM$St^X^lVj$} #%jWZj0Zo4mYOM$St^X^lVj$} #%jWZj0Zo4mYOM$St^X^lVj$}
+   sapClient: ${SRM_SAPCLIENT:300} #%jWZj0Zo4mYOM$St^X^lVj$} #%jWZj0Zo4mYOM$St^X^lVj$}
+adfs:
+   appID: H0
+   appKey: 924D8A2C2C43BE544A600520075B1E9110FB19252E92585C
+   loginUrl: https://adfs-test.infinitus-int.com:8000/login.aspx
+   userInfoUrl: https://adfs-test.infinitus-int.com:8000/GetAccInfo.aspx
+   logoutUrl: https://adfs-test.infinitus-int.com:8000/logout.aspx
+   callbackUrl: ${GATEWAY_HOST:http://localhost:8060}/login/adfs
+
+justauth:
+  enabled: true
+  type:
+    GITEE:
+      client-id: aebee159f70908a849b80d815410833c93e24518b4b8d04a1df55bb2c93dc85b
+      client-secret: fb82c3ef56ba32d168e9870611a24fcbeb242c5d1f42c63e71fe3ac20268dc78
+      redirect-uri: http://localhost:8080/login/gitee
+    GITHUB:
+      client-id: abda4e606d5c55084eb1
+      client-secret: 3d53b0f8005438fe38c540afcc4644552dcb2690
+      redirect-uri: http://localhost:8080/login/github
