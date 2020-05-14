@@ -1,3 +1,28 @@
+j2cache:
+   open-spring-cache: true
+   allow-null-values: false
+   cache-clean-mode: passive
+   redis-client: jedis
+   broadcast: net.oschina.j2cache.cache.support.redis.SpringRedisPubSubPolicy
+   L1:
+      provider_class: caffeine
+   L2:
+      provider_class: net.oschina.j2cache.cache.support.redis.SpringRedisProvider
+      config_section: spring.redis
+caffeine:
+    region:
+        default: 1000, 1h
+        session: 10000, 4h
+        users: 1000, 10s
+spring:
+   cache:
+      type: GENERIC
+   redis:
+      hosts: ${SPRING_REDIS_HOSTS}
+      host: ${SPRING_REDIS_HOST}
+      password: ${SPRING_REDIS_PASSWORD}
+      database: ${SPRING_REDIS_DATABASE}
+
 srm:
    uri: ${SRM_URL:http://10.86.21.74:8000/zrestsrvset/zsrmrest/check_login}
    myappid: ${SRM_APPID:momo}
