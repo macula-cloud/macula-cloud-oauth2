@@ -26,14 +26,12 @@ public class WebChannelAuthenticationProvider implements ChannelAuthentication {
 	}
 
 	@Override
-	public boolean support(ChannelAuthenticationDetails details) {
-		return details != null && details.getCredential() != null && details.getCredential().getUsername() != null
-				&& details.getCredential().getPassword() != null;
+	public boolean support(LoginCredential credential) {
+		return credential != null && credential.getUsername() != null && credential.getPassword() != null;
 	}
 
 	@Override
-	public SubjectPrincipal loginAuthentication(ChannelAuthenticationDetails details) throws AuthenticationException {
-		LoginCredential credential = details.getCredential();
+	public SubjectPrincipal loginAuthentication(LoginCredential credential) throws AuthenticationException {
 		if (captchaVlidationPolicy.isNeedCaptchaValidate(credential.getUsername())) {
 			String captchaCode = credential.getCaptchaCode();
 			String captcha = credential.getCaptcha();

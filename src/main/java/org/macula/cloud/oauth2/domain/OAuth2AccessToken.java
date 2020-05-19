@@ -16,6 +16,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Table(name = "MC_OAUTH2_ACCESS_TOKEN")
 public class OAuth2AccessToken extends AbstractAuditable<Long> {
 
+	@Column(name = "CLIENT_ID", length = 32)
+	private String clientId;
+
 	@Column(name = "	TOKEN_ID", length = 128)
 	private String tokenId;
 
@@ -24,9 +27,6 @@ public class OAuth2AccessToken extends AbstractAuditable<Long> {
 
 	@Column(name = "USER_NAME", length = 32)
 	private String username;
-
-	@Column(name = "CLIENT_ID", length = 32)
-	private String clientId;
 
 	@Column(name = "REFRESH_TOKEN", length = 128)
 	private String refreshToken;

@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.macula.cloud.core.principal.LoginCredential;
 import org.macula.cloud.core.principal.SubjectPrincipal;
-import org.macula.cloud.core.utils.SecurityUtils;
 import org.macula.cloud.oauth2.channel.ChannelAuthentication;
 import org.macula.cloud.oauth2.channel.ChannelAuthenticationDetails;
 import org.macula.cloud.oauth2.exception.OAuth2AuthenticationException;
@@ -13,14 +12,15 @@ import org.macula.cloud.oauth2.utils.LoginPasswordDecoder;
 import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.core.OrderComparator;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.authentication.dao.AbstractUserDetailsAuthenticationProvider;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.SpringSecurityMessageSource;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
-import org.springframework.util.Assert;
 
 @Component
-public class OAuth2AuthenticationProvider implements CentralAuthenticationProvider {
+public class OAuth2AuthenticationProvider extends AbstractUserDetailsAuthenticationProvider implements CentralAuthenticationProvider {
 
 	private final List<ChannelAuthentication> channelAuthentications;
 	private final List<SourceLoginStrategy> sourceLoginStrategies;
@@ -34,27 +34,23 @@ public class OAuth2AuthenticationProvider implements CentralAuthenticationProvid
 	}
 
 	@Override
-	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-		Assert.isInstanceOf(UsernamePasswordAuthenticationToken.class, authentication, () -> messages
-				.getMessage("AbstractUserDetailsAuthenticationProvider.onlySupports", "Only UsernamePasswordAuthenticationToken is supported"));
-		ChannelAuthenticationDetails details = (ChannelAuthenticationDetails) authentication.getDetails();
-		LoginCredential credential = details.getCredential();
+	protected UserDetails retrieveUser(String username, UsernamePasswordAuthenticationToken authentication) throws AuthenticationException {
+		LoginCredential credential = createLoginCredential(authentication);
 		if (credential.getUsername() == null) {
 			credential.setUsername(authentication.getName());
 		}
-		credential.setPassword(LoginPasswordDecoder.decode(authentication.getCredentials().toString()));
-		return loginAuthentication(details);
+		return loginAuthentication(credential);
 	}
 
-	protected Authentication loginAuthentication(ChannelAuthenticationDetails details) throws AuthenticationException {
+	protected UserDetails loginAuthentication(LoginCredential credential) throws AuthenticationException {
 		for (ChannelAuthentication channelAuthentication : channelAuthentications) {
-			if (channelAuthentication.support(details)) {
-				SubjectPrincipal principal = channelAuthentication.loginAuthentication(details);
-				principal.setCredential(details.getCredential());
+			if (channelAuthentication.support(credential)) {
+				SubjectPrincipal principal = channelAuthentication.loginAuthentication(credential);
+				principal.setCredential(credential);
 				if (principal != null) {
 					for (SourceLoginStrategy loginStrategy : sourceLoginStrategies) {
-						if (loginStrategy.support(principal.getSource()) && loginStrategy.validate(principal, details.getCredential())) {
-							return SecurityUtils.cast(principal);
+						if (loginStrategy.support(principal.getSource()) && loginStrategy.validate(principal, credential)) {
+							return principal;
 						}
 					}
 				}
@@ -71,6 +67,27 @@ public class OAuth2AuthenticationProvider implements CentralAuthenticationProvid
 	@Override
 	public int getOrder() {
 		return HIGHEST_PRECEDENCE + 100;
+	}
+
+	protected LoginCredential createLoginCredential(Authentication authentication) {
+		Object details = authentication.getDetails();
+		if (details instanceof ChannelAuthenticationDetails) {
+			LoginCredential credential = ((ChannelAuthenticationDetails) details).getCredential();
+			credential.setPassword(LoginPasswordDecoder.decode(authentication.getCredentials().toString()));
+			return credential;
+		}
+		LoginCredential credential = new LoginCredential();
+		credential.setUsername(authentication.getName());
+		if (authentication.getCredentials() instanceof String) {
+			credential.setPassword((String) authentication.getCredentials());
+		}
+		return credential;
+	}
+
+	@Override
+	protected void additionalAuthenticationChecks(UserDetails userDetails, UsernamePasswordAuthenticationToken authentication)
+			throws AuthenticationException {
+
 	}
 
 }

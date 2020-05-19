@@ -22,14 +22,12 @@ public class MobileChannelAuthenticationProvider implements ChannelAuthenticatio
 	}
 
 	@Override
-	public boolean support(ChannelAuthenticationDetails details) {
-		return details != null && details.getCredential() != null && details.getCredential().getMobile() != null
-				&& details.getCredential().getSms() != null;
+	public boolean support(LoginCredential credential) {
+		return credential != null && credential.getMobile() != null && credential.getSms() != null;
 	}
 
 	@Override
-	public SubjectPrincipal loginAuthentication(ChannelAuthenticationDetails details) throws AuthenticationException {
-		LoginCredential credential = details.getCredential();
+	public SubjectPrincipal loginAuthentication(LoginCredential credential) throws AuthenticationException {
 		if (captchaVlidationPolicy.isNeedCaptchaValidate(credential.getMobile())) {
 			String captchaCode = credential.getCaptchaCode();
 			String captcha = credential.getCaptcha();

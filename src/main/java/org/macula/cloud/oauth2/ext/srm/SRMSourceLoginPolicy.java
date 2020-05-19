@@ -39,9 +39,9 @@ public class SRMSourceLoginPolicy implements SourceLoginStrategy {
 	private final SRMProperties properties;
 	private final RestTemplate requestTemplate;
 
-	public SRMSourceLoginPolicy(SRMProperties properties, RestTemplate requestTemplate) {
+	public SRMSourceLoginPolicy(SRMProperties properties) {
 		this.properties = properties;
-		this.requestTemplate = requestTemplate;
+		this.requestTemplate = new RestTemplate();
 	}
 
 	@Override
