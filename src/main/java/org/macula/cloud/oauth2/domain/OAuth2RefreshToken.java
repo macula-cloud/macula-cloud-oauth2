@@ -6,12 +6,16 @@ import javax.persistence.Lob;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 import org.macula.cloud.core.domain.AbstractAuditable;
 import org.springframework.security.oauth2.common.util.SerializationUtils;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
+@DynamicInsert
+@DynamicUpdate
 @Table(name = "MC_OAUTH2_REFRESH_TOKEN")
 public class OAuth2RefreshToken extends AbstractAuditable<Long> {
 	@Column(name = "	TOKEN_ID", length = 128)

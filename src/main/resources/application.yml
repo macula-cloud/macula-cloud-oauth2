@@ -23,19 +23,6 @@ spring:
       password: ${SPRING_REDIS_PASSWORD}
       database: ${SPRING_REDIS_DATABASE}
 
-srm:
-   uri: ${SRM_URL:http://10.86.21.74:8000/zrestsrvset/zsrmrest/check_login}
-   myappid: ${SRM_APPID:momo}
-   securitykey: ${SRM_APPKEY:JdW9Jxhm#%jWZj0Zo4mYOM$St^X^lVj$} #%jWZj0Zo4mYOM$St^X^lVj$} #%jWZj0Zo4mYOM$St^X^lVj$} #%jWZj0Zo4mYOM$St^X^lVj$}
-   sapClient: ${SRM_SAPCLIENT:300} #%jWZj0Zo4mYOM$St^X^lVj$} #%jWZj0Zo4mYOM$St^X^lVj$}
-adfs:
-   appID: H0
-   appKey: 924D8A2C2C43BE544A600520075B1E9110FB19252E92585C
-   loginUrl: https://adfs-test.infinitus-int.com:8000/login.aspx
-   userInfoUrl: https://adfs-test.infinitus-int.com:8000/GetAccInfo.aspx
-   logoutUrl: https://adfs-test.infinitus-int.com:8000/logout.aspx
-   callbackUrl: ${GATEWAY_HOST:http://localhost:8060}/login/adfs
-
 justauth:
   enabled: true
   type:

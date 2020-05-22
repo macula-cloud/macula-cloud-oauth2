@@ -14,7 +14,7 @@ import org.macula.cloud.core.utils.HttpRequestUtils;
 import org.macula.cloud.core.utils.J2CacheUtils;
 import org.macula.cloud.core.utils.SecurityUtils;
 import org.macula.cloud.oauth2.central.OAuth2UserDetailsService;
-import org.macula.cloud.oauth2.config.AuthRequestFactory;
+import org.macula.cloud.oauth2.config.JustAuthRequestFactory;
 import org.macula.cloud.oauth2.service.OAuth2UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -32,7 +32,7 @@ import me.zhyd.oauth.request.AuthRequest;
 public class JustAuthAuthenticationProcessingFilter extends AbstractAuthenticationProcessingFilter {
 
 	@Autowired
-	private AuthRequestFactory authRequestFactory;
+	private JustAuthRequestFactory authRequestFactory;
 
 	@Autowired
 	private OAuth2UserDetailsService userService;

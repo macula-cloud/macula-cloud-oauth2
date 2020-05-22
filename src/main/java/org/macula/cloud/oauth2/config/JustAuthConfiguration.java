@@ -7,13 +7,13 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@EnableConfigurationProperties(AuthRequestProperties.class)
-public class AuthConfiguration {
+@EnableConfigurationProperties(JustAuthRequestProperties.class)
+public class JustAuthConfiguration {
 
 	@Bean
 	@ConditionalOnProperty(prefix = "justauth", value = "enabled", havingValue = "true", matchIfMissing = false)
-	public AuthRequestFactory authRequestFactory(AuthRequestProperties properties) {
-		return new AuthRequestFactory(properties);
+	public JustAuthRequestFactory authRequestFactory(JustAuthRequestProperties properties) {
+		return new JustAuthRequestFactory(properties);
 	}
 
 	@Bean

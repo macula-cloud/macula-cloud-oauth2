@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
 import org.macula.cloud.core.utils.J2CacheUtils;
-import org.macula.cloud.oauth2.config.AuthRequestFactory;
+import org.macula.cloud.oauth2.config.JustAuthRequestFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -22,7 +22,7 @@ import me.zhyd.oauth.utils.AuthStateUtils;
 public class JustAuthLoginController {
 
 	@Autowired
-	private AuthRequestFactory authRequestFactory;
+	private JustAuthRequestFactory authRequestFactory;
 
 	@RequestMapping("/{source}/authorize")
 	public void render(@PathVariable("source") String source,

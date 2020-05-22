@@ -13,7 +13,7 @@ import me.zhyd.oauth.config.AuthSource;
 @Getter
 @Setter
 @ConfigurationProperties(prefix = "justauth")
-public class AuthRequestProperties {
+public class JustAuthRequestProperties {
 
 	/**
 	 * 是否启用 JustAuth

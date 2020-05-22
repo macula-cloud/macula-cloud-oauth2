@@ -31,9 +31,9 @@ import me.zhyd.oauth.request.AuthWeChatRequest;
 import me.zhyd.oauth.request.AuthWeiboRequest;
 
 @RequiredArgsConstructor
-public class AuthRequestFactory {
+public class JustAuthRequestFactory {
 
-	private final AuthRequestProperties properties;
+	private final JustAuthRequestProperties properties;
 
 	public AuthRequest get(String source) {
 		return get(AuthSource.valueOf(source.toUpperCase()));

@@ -6,6 +6,8 @@ import javax.persistence.Lob;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 import org.macula.cloud.core.domain.AbstractAuditable;
 import org.springframework.security.oauth2.common.util.SerializationUtils;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
@@ -13,6 +15,8 @@ import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
+@DynamicInsert
+@DynamicUpdate
 @Table(name = "MC_OAUTH2_CODE")
 public class OAuth2Code extends AbstractAuditable<Long> {
 
@@ -39,18 +43,30 @@ public class OAuth2Code extends AbstractAuditable<Long> {
 		this.authentication = SerializationUtils.serialize(oauth2Authentication);
 	}
 
+	/**
+	 * @return the code
+	 */
 	public String getCode() {
 		return code;
 	}
 
+	/**
+	 * @param code the code to set
+	 */
 	public void setCode(String code) {
 		this.code = code;
 	}
 
+	/**
+	 * @return the authentication
+	 */
 	public byte[] getAuthentication() {
 		return authentication;
 	}
 
+	/**
+	 * @param authentication the authentication to set
+	 */
 	public void setAuthentication(byte[] authentication) {
 		this.authentication = authentication;
 	}
