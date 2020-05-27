@@ -1,3 +1,9 @@
+logging:
+   pattern:
+      file: '%d %file:%line %p - %m%n'
+      console: '%d %file:%line %p - %m%n'
+   level:
+      ROOT: DEBUG
 eureka:
    client:
       service-url:
