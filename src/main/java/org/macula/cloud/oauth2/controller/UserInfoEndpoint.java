@@ -8,12 +8,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class OAuth2UserProfileController {
+public class UserInfoEndpoint {
 
 	@Autowired
 	private SubjectPrincipalSessionStorage sessionStorage;
 
-	@RequestMapping(value = { "/user/me", "/api/profile/me" })
+	@RequestMapping(value = { "/user/me", "/api/user/me" })
 	public Object user(Authentication authentication) {
 		if (authentication != null && authentication.getPrincipal() instanceof SubjectPrincipal) {
 			String guid = ((SubjectPrincipal) authentication.getPrincipal()).getUserId();
