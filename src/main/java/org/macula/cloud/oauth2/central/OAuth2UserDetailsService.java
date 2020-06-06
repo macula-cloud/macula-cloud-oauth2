@@ -1,10 +1,12 @@
 package org.macula.cloud.oauth2.central;
 
-import java.util.Collections;
+import java.util.List;
 
 import org.macula.cloud.core.principal.SubjectPrincipal;
 import org.macula.cloud.oauth2.domain.OAuth2User;
 import org.macula.cloud.oauth2.repository.OAuth2UserRepository;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -32,9 +34,10 @@ public class OAuth2UserDetailsService implements UserDetailsService {
 				&& (user.getEffectiveDate() == null || user.getEffectiveDate().before(DateTime.now().toJdkDate()));
 
 		// TODO need load authorities ???
+		List<GrantedAuthority> authorityList = AuthorityUtils.createAuthorityList("macula-cloud-gateway");
 
 		SubjectPrincipal principal = new SubjectPrincipal(user.getUsername(), user.getPassword(), !Boolean.FALSE.equals(user.getEnabled()),
-				accountNonExpired, true, Boolean.TRUE.equals(user.getLocked()), Collections.emptyList());
+				accountNonExpired, true, Boolean.TRUE.equals(user.getLocked()), authorityList);
 		principal.setSource(user.getSource());
 		principal.setAvatar(user.getAvatar());
 		principal.setEmail(user.getEmail());
