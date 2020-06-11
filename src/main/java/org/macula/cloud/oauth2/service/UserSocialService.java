@@ -32,6 +32,7 @@ public class UserSocialService {
 		if (user.getPassword() == null) {
 			user.setPassword(command.getSocial().getOpenId());
 		}
+		user.setLocked(false);
 		user.setPassword(passwordEncoder.encode(user.getPassword()));
 		userRepository.save(user);
 
