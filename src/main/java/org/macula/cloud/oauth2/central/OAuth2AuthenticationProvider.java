@@ -8,7 +8,6 @@ import org.macula.cloud.oauth2.channel.ChannelAuthentication;
 import org.macula.cloud.oauth2.channel.ChannelAuthenticationDetails;
 import org.macula.cloud.oauth2.exception.OAuth2AuthenticationException;
 import org.macula.cloud.oauth2.source.SourceLoginStrategy;
-import org.macula.cloud.oauth2.utils.LoginPasswordDecoder;
 import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.core.OrderComparator;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -73,7 +72,8 @@ public class OAuth2AuthenticationProvider extends AbstractUserDetailsAuthenticat
 		Object details = authentication.getDetails();
 		if (details instanceof ChannelAuthenticationDetails) {
 			LoginCredential credential = ((ChannelAuthenticationDetails) details).getCredential();
-			credential.setPassword(LoginPasswordDecoder.decode(authentication.getCredentials().toString()));
+			//	credential.setPassword(LoginPasswordDecoder.decode(authentication.getCredentials().toString()));
+			credential.setPassword(authentication.getCredentials().toString());
 			return credential;
 		}
 		LoginCredential credential = new LoginCredential();

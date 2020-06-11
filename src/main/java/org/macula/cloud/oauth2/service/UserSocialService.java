@@ -41,6 +41,7 @@ public class UserSocialService {
 		}
 		social.clone(command.getSocial());
 		social.setUserId(String.valueOf(user.getId()));
+		social.setUsername(user.getUsername());
 		ucRepository.save(social);
 		return user.getUsername();
 	}

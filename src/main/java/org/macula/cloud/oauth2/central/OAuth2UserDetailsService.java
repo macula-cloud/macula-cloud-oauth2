@@ -37,7 +37,7 @@ public class OAuth2UserDetailsService implements UserDetailsService {
 		List<GrantedAuthority> authorityList = AuthorityUtils.createAuthorityList("macula-cloud-gateway");
 
 		SubjectPrincipal principal = new SubjectPrincipal(user.getUsername(), user.getPassword(), !Boolean.FALSE.equals(user.getEnabled()),
-				accountNonExpired, true, Boolean.TRUE.equals(user.getLocked()), authorityList);
+				accountNonExpired, true, Boolean.FALSE.equals(user.getLocked()), authorityList);
 		principal.setSource(user.getSource());
 		principal.setAvatar(user.getAvatar());
 		principal.setEmail(user.getEmail());
