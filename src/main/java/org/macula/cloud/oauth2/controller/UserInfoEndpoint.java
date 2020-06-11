@@ -4,7 +4,7 @@ import org.macula.cloud.core.principal.SubjectPrincipal;
 import org.macula.cloud.core.principal.SubjectPrincipalSessionStorage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -13,7 +13,7 @@ public class UserInfoEndpoint {
 	@Autowired
 	private SubjectPrincipalSessionStorage sessionStorage;
 
-	@RequestMapping(value = { "/user/me", "/api/user/me" })
+	@GetMapping(value = { "/user/me", "/api/user/me" })
 	public Object user(Authentication authentication) {
 		if (authentication != null && authentication.getPrincipal() instanceof SubjectPrincipal) {
 			String guid = ((SubjectPrincipal) authentication.getPrincipal()).getUserId();
