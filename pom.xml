@@ -12,7 +12,6 @@
 
 	<artifactId>macula-cloud-oauth2</artifactId>
 	<name>macula-cloud-oauth2</name>
-	<version>latest</version>
 	<description>Macula Cloud OAuth2 Extension Project</description>
 
 	<properties>
@@ -117,7 +116,7 @@
 				<artifactId>dockerfile-maven-plugin</artifactId>
 				<configuration>
 					<repository>${docker.registry}/${project.groupId}/${project.artifactId}</repository>
-					<tag>${project.version}</tag>
+					<tag>latest</tag>
 					<useMavenSettingsForAuth>true</useMavenSettingsForAuth>
 					<buildArgs>
 						<SERVER_PORT>7080</SERVER_PORT>
