@@ -22,7 +22,7 @@ public class UserSocialController {
 
 	@PutMapping("/create")
 	public String createSocialUser(@RequestBody CreateSocialUserCommand command) {
-		log.info("Received ", command);
+		log.info("Received {}", command);
 		return ucService.createSocialUser(command);
 	}
 
