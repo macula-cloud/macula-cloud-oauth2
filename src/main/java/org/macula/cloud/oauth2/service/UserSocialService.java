@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.alibaba.druid.support.json.JSONUtils;
+import com.alibaba.fastjson.JSONObject;
 
 import lombok.extern.slf4j.Slf4j;
 import me.zhyd.oauth.model.AuthUser;
@@ -43,7 +43,7 @@ public class UserSocialService {
 		user.setPassword(passwordEncoder.encode(user.getPassword()));
 		userRepository.save(user);
 
-		log.info("Created user: {}", JSONUtils.toJSONString(user));
+		log.info("Created user: {}", JSONObject.toJSON(user));
 
 		UserSocial social = ucRepository.findSocialUser(user.getUsername(), command.getSocial().getOpenId());
 		if (social == null) {
@@ -53,7 +53,7 @@ public class UserSocialService {
 		social.setUserId(String.valueOf(user.getId()));
 		social.setUsername(user.getUsername());
 		ucRepository.save(social);
-		log.info("Created social: {}", JSONUtils.toJSONString(social));
+		log.info("Created social: {}", JSONObject.toJSON(social));
 		return user.getUsername();
 	}
 
