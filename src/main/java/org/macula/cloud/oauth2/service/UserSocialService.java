@@ -1,5 +1,7 @@
 package org.macula.cloud.oauth2.service;
 
+import javax.transaction.Transactional;
+
 import org.macula.cloud.core.command.CreateSocialUserCommand;
 import org.macula.cloud.oauth2.domain.OAuth2User;
 import org.macula.cloud.oauth2.domain.UserSocial;
@@ -9,9 +11,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.alibaba.druid.support.json.JSONUtils;
+
+import lombok.extern.slf4j.Slf4j;
 import me.zhyd.oauth.model.AuthUser;
 
 @Service
+@Slf4j
 public class UserSocialService {
 
 	@Autowired
@@ -23,6 +29,7 @@ public class UserSocialService {
 	@Autowired
 	private OAuth2UserRepository userRepository;
 
+	@Transactional
 	public String createSocialUser(CreateSocialUserCommand command) {
 		OAuth2User user = userRepository.findByLogin(command.getUser().getUsername());
 		if (user == null) {
@@ -36,6 +43,8 @@ public class UserSocialService {
 		user.setPassword(passwordEncoder.encode(user.getPassword()));
 		userRepository.save(user);
 
+		log.info("Created user: {}", JSONUtils.toJSONString(user));
+
 		UserSocial social = ucRepository.findSocialUser(user.getUsername(), command.getSocial().getOpenId());
 		if (social == null) {
 			social = new UserSocial();
@@ -44,6 +53,7 @@ public class UserSocialService {
 		social.setUserId(String.valueOf(user.getId()));
 		social.setUsername(user.getUsername());
 		ucRepository.save(social);
+		log.info("Created social: {}", JSONUtils.toJSONString(social));
 		return user.getUsername();
 	}
 
