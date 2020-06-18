@@ -1,6 +1,7 @@
 package org.macula.cloud.oauth2.central;
 
 import java.io.IOException;
+import java.util.Optional;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -30,11 +31,12 @@ public class SubjectLogoutSuccessHandler implements LogoutSuccessHandler {
 
 	@Override
 	public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException {
-		SessionIdPayload.extract(request).map(token -> {
-			tokenStore.removeAccessToken(new DefaultOAuth2AccessToken(token));
-			tokenStore.removeRefreshToken(new DefaultOAuth2RefreshToken(token));
-			return token;
-		});
+		Optional<String> token = SessionIdPayload.extract(request);
+		if (token.isPresent()) {
+			tokenStore.removeAccessToken(new DefaultOAuth2AccessToken(token.get()));
+			tokenStore.removeRefreshToken(new DefaultOAuth2RefreshToken(token.get()));
+		}
+		;
 		request.getSession().invalidate();
 
 		String redirectPath = request.getParameter("redirect");
