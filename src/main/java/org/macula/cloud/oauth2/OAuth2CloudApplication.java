@@ -1,7 +1,6 @@
 package org.macula.cloud.oauth2;
 
 import org.macula.cloud.security.access.EnableSecurityAccess;
-import org.macula.cloud.security.feign.EnableOAuth2ClientFeign;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.cache.annotation.EnableCaching;
@@ -14,7 +13,6 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 
 @SpringCloudApplication
 @EnableWebSecurity
-@EnableOAuth2ClientFeign
 @EnableResourceServer
 @EnableSecurityAccess
 @EnableJpaRepositories
