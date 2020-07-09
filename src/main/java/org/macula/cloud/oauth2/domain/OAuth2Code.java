@@ -1,5 +1,7 @@
 package org.macula.cloud.oauth2.domain;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Lob;
@@ -18,7 +20,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @DynamicInsert
 @DynamicUpdate
 @Table(name = "MC_OAUTH2_CODE")
-public class OAuth2Code extends AbstractAuditable<Long> {
+public class OAuth2Code extends AbstractAuditable<Long> implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	@Column(name = "	CODE", length = 128)
 	private String code;

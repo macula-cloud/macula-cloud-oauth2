@@ -34,8 +34,8 @@ public class UserSocialService {
 		OAuth2User user = userRepository.findByLogin(command.getUser().getUsername());
 		if (user == null) {
 			user = new OAuth2User();
+			user.clone(command.getUser());
 		}
-		user.clone(command.getUser());
 		if (user.getPassword() == null) {
 			user.setPassword(command.getSocial().getOpenId());
 		}
@@ -48,8 +48,8 @@ public class UserSocialService {
 		UserSocial social = ucRepository.findSocialUser(user.getUsername(), command.getSocial().getOpenId());
 		if (social == null) {
 			social = new UserSocial();
+			social.clone(command.getSocial());
 		}
-		social.clone(command.getSocial());
 		social.setUserId(String.valueOf(user.getId()));
 		social.setUsername(user.getUsername());
 		ucRepository.save(social);

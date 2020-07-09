@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import lombok.extern.slf4j.Slf4j;
 
 @RestController
-@RequestMapping("/v1/social")
+@RequestMapping("/api/v1/social")
 @Slf4j
 public class UserSocialController {
 
