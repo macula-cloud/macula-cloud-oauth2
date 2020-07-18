@@ -45,8 +45,8 @@ public class OAuth2AuthenticationProvider extends AbstractUserDetailsAuthenticat
 		for (ChannelAuthentication channelAuthentication : channelAuthentications) {
 			if (channelAuthentication.support(credential)) {
 				SubjectPrincipal principal = channelAuthentication.loginAuthentication(credential);
-				principal.setCredential(credential);
 				if (principal != null) {
+					principal.setCredential(credential);
 					for (SourceLoginStrategy loginStrategy : sourceLoginStrategies) {
 						if (loginStrategy.support(principal.getSource()) && loginStrategy.validate(principal, credential)) {
 							return principal;
