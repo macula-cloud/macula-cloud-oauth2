@@ -1,6 +1,6 @@
 package org.macula.cloud.oauth2.exception;
 
-import org.macula.cloud.core.context.CloudApplicationContext;
+import org.macula.cloud.api.context.CloudApplicationContext;
 import org.springframework.security.core.AuthenticationException;
 
 public class OAuth2AuthenticationException extends AuthenticationException {
