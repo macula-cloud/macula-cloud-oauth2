@@ -2,11 +2,11 @@ package org.macula.cloud.oauth2.service;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.macula.cloud.core.utils.SystemUtils;
 import org.macula.cloud.oauth2.domain.OAuth2AccessToken;
 import org.macula.cloud.oauth2.repository.OAuth2AccessTokenRepository;
 import org.macula.cloud.oauth2.repository.OAuth2RefreshTokenRepository;
@@ -66,7 +66,7 @@ public class OAuth2TokenStore implements TokenStore {
 		if (attr != null) {
 			sessionId = attr.getRequest().getSession(true).getId();
 		}
-		additionalInfo.put("createTime", new Date());
+		additionalInfo.put("createTime", SystemUtils.getCurrentTime());
 		additionalInfo.put("sessionId", sessionId);
 		((DefaultOAuth2AccessToken) token).setAdditionalInformation(additionalInfo);
 
