@@ -1,9 +1,9 @@
 package org.macula.cloud.oauth2.channel;
 
 import org.apache.commons.lang3.StringUtils;
+import org.macula.cloud.cache.utils.J2CacheUtils;
 import org.macula.cloud.core.principal.LoginCredential;
 import org.macula.cloud.core.principal.SubjectPrincipal;
-import org.macula.cloud.core.utils.J2CacheUtils;
 import org.macula.cloud.oauth2.central.OAuth2UserDetailsService;
 import org.macula.cloud.oauth2.exception.OAuth2AuthenticationException;
 import org.macula.cloud.security.authentication.CaptchaValidationPolicy;

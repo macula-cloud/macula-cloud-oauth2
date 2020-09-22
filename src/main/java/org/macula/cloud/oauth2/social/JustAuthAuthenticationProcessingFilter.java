@@ -8,10 +8,10 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.macula.cloud.cache.utils.J2CacheUtils;
 import org.macula.cloud.core.principal.LoginCredential;
 import org.macula.cloud.core.principal.SubjectPrincipal;
 import org.macula.cloud.core.utils.HttpRequestUtils;
-import org.macula.cloud.core.utils.J2CacheUtils;
 import org.macula.cloud.core.utils.SecurityUtils;
 import org.macula.cloud.oauth2.central.OAuth2UserDetailsService;
 import org.macula.cloud.oauth2.config.JustAuthRequestFactory;

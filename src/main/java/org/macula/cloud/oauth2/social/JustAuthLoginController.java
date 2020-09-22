@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
-import org.macula.cloud.core.utils.J2CacheUtils;
+import org.macula.cloud.cache.utils.J2CacheUtils;
 import org.macula.cloud.oauth2.config.JustAuthRequestFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

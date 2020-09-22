@@ -1,5 +1,7 @@
 package org.macula.cloud.oauth2.central;
 
+import java.util.HashMap;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -21,7 +23,6 @@ import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.Sets;
 
-import cn.hutool.core.map.MapUtil;
 import lombok.extern.slf4j.Slf4j;
 
 @Component
@@ -37,13 +38,12 @@ public class OAuth2AjaxAuthenticationSuccessHandler implements AjaxAuthenticatio
 	private AuthorizationServerTokenServices authorizationServerTokenServices;
 
 	@Override
-	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
-			Authentication authentication) {
+	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) {
 		String clientId = request.getParameter(OAuth2Utils.CLIENT_ID);
 		String grantType = "code";
 		ClientDetails clientDetails = clientDetailsService.loadClientByClientId(clientId);
 
-		TokenRequest tokenRequest = new TokenRequest(MapUtil.newHashMap(), clientId, Sets.newHashSet(), grantType);
+		TokenRequest tokenRequest = new TokenRequest(new HashMap(), clientId, Sets.newHashSet(), grantType);
 		OAuth2Request oAuth2Request = tokenRequest.createOAuth2Request(clientDetails);
 		OAuth2Authentication oAuth2Authentication = new OAuth2Authentication(oAuth2Request, authentication);
 

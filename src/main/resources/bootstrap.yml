@@ -33,8 +33,6 @@ macula:
          name: ${spring.application.name}
       event:
          kafka: false
-      cache:
-         j2cache: true
       feign:
          oauth2: true
       security:

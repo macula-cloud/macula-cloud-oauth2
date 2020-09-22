@@ -3,6 +3,7 @@ package org.macula.cloud.oauth2.central;
 import java.util.List;
 
 import org.macula.cloud.core.principal.SubjectPrincipal;
+import org.macula.cloud.core.utils.SystemUtils;
 import org.macula.cloud.oauth2.domain.OAuth2User;
 import org.macula.cloud.oauth2.repository.OAuth2UserRepository;
 import org.springframework.security.core.GrantedAuthority;
@@ -10,8 +11,6 @@ import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-
-import cn.hutool.core.date.DateTime;
 
 @Service
 public class OAuth2UserDetailsService implements UserDetailsService {
@@ -30,8 +29,8 @@ public class OAuth2UserDetailsService implements UserDetailsService {
 			return null;
 		}
 
-		boolean accountNonExpired = (user.getInactiveDate() == null || user.getInactiveDate().after(DateTime.now().toJdkDate()))
-				&& (user.getEffectiveDate() == null || user.getEffectiveDate().before(DateTime.now().toJdkDate()));
+		boolean accountNonExpired = (user.getInactiveDate() == null || user.getInactiveDate().after(SystemUtils.getCurrentTime()))
+				&& (user.getEffectiveDate() == null || user.getEffectiveDate().before(SystemUtils.getCurrentTime()));
 
 		// TODO need load authorities ???
 		List<GrantedAuthority> authorityList = AuthorityUtils.createAuthorityList("macula-cloud-gateway");
