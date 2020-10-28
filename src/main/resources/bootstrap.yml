@@ -19,22 +19,11 @@ server:
 spring:
    application:
       name: macula-cloud-oauth2
-   cloud:
-      config:
-         discovery:
-            enabled: true
-            service-id: macula-cloud-config
-         label: ${GIT_LABEL:master}
-         profile: ${CONFIG-PROFILE-ACTIVE:wilson}
 macula:
    cloud:
       application:
          group: scmp
          name: ${spring.application.name}
-      event:
-         kafka: false
-      feign:
-         oauth2: true
       security:
          login-path: /login
          oauth2-login: false
