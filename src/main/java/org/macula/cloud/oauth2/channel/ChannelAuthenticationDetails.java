@@ -2,7 +2,7 @@ package org.macula.cloud.oauth2.channel;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.macula.cloud.core.principal.LoginCredential;
+import org.macula.cloud.core.oauth2.LoginCredential;
 import org.macula.cloud.core.utils.HttpRequestUtils;
 import org.springframework.security.web.authentication.WebAuthenticationDetails;
 

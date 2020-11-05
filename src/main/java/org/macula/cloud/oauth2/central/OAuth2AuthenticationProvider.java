@@ -2,8 +2,8 @@ package org.macula.cloud.oauth2.central;
 
 import java.util.List;
 
-import org.macula.cloud.core.principal.LoginCredential;
-import org.macula.cloud.core.principal.SubjectPrincipal;
+import org.macula.cloud.core.oauth2.LoginCredential;
+import org.macula.cloud.core.oauth2.SubjectPrincipal;
 import org.macula.cloud.oauth2.channel.ChannelAuthentication;
 import org.macula.cloud.oauth2.channel.ChannelAuthenticationDetails;
 import org.macula.cloud.oauth2.exception.OAuth2AuthenticationException;
@@ -46,7 +46,7 @@ public class OAuth2AuthenticationProvider extends AbstractUserDetailsAuthenticat
 			if (channelAuthentication.support(credential)) {
 				SubjectPrincipal principal = channelAuthentication.loginAuthentication(credential);
 				if (principal != null) {
-					principal.setCredential(credential);
+					principal.setCurrentCredential(credential);
 					for (SourceLoginStrategy loginStrategy : sourceLoginStrategies) {
 						if (loginStrategy.support(principal.getSource()) && loginStrategy.validate(principal, credential)) {
 							return principal;

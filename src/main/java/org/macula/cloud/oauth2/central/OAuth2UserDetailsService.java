@@ -2,7 +2,7 @@ package org.macula.cloud.oauth2.central;
 
 import java.util.List;
 
-import org.macula.cloud.core.principal.SubjectPrincipal;
+import org.macula.cloud.core.oauth2.SubjectPrincipal;
 import org.macula.cloud.core.utils.SystemUtils;
 import org.macula.cloud.oauth2.domain.OAuth2User;
 import org.macula.cloud.oauth2.repository.OAuth2UserRepository;

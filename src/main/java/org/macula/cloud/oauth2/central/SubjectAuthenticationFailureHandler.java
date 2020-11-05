@@ -9,7 +9,6 @@ import javax.servlet.http.HttpSession;
 
 import org.macula.cloud.core.configure.CoreConfigurationProperties;
 import org.macula.cloud.core.utils.StringUtils;
-import org.macula.cloud.oauth2.exception.OAuth2AuthenticationException;
 import org.macula.cloud.security.authentication.CaptchaValidationPolicy;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.DefaultRedirectStrategy;
@@ -38,9 +37,6 @@ public class SubjectAuthenticationFailureHandler implements AuthenticationFailur
 		if (session != null) {
 			session.setAttribute("username", username);
 			session.setAttribute(WebAttributes.AUTHENTICATION_EXCEPTION, exception.getMessage());
-			if (exception instanceof OAuth2AuthenticationException) {
-				session.setAttribute(WebAttributes.AUTHENTICATION_EXCEPTION + "-CODE", ((OAuth2AuthenticationException) exception).getCode());
-			}
 		}
 		if (StringUtils.isNotEmpty(username)) {
 			captchaValidationPolicy.increaseCaptchaMarks(username);

@@ -1,7 +1,7 @@
 package org.macula.cloud.oauth2.source;
 
-import org.macula.cloud.core.principal.LoginCredential;
-import org.macula.cloud.core.principal.SubjectPrincipal;
+import org.macula.cloud.core.oauth2.LoginCredential;
+import org.macula.cloud.core.oauth2.SubjectPrincipal;
 import org.macula.cloud.oauth2.repository.UserSocialRepository;
 import org.springframework.stereotype.Component;
 
