@@ -1,32 +1,30 @@
-logging:
-   pattern:
-      file: '%d %file:%line %p - %m%n'
-      console: '%d %file:%line %p - %m%n'
-   level:
-      ROOT: DEBUG
-eureka:
-   client:
-      service-url:
-         defaultZone: ${EUREKA_SERVER:http://macula:macula2019@localhost:8761/eureka}
-   instance:
-      prefer-ip-address: true
+spring:
+  application:
+    name: macula-cloud-oauth2
+  cloud: 
+    nacos: 
+      config:
+        server-addr: nacos.ebestpet.com:8848
+        group: macula-cloud
+        namespace: scmp-cloud-dev
+        file-extension: yaml
+      discovery:
+        server-addr: nacos.ebestpet.com:8848
+        group: macula-cloud
+        namespace: scmp-cloud-dev
+macula:
+   cloud:
+      application:
+         group: macula-cloud
+         name: ${spring.application.name}
+      security:
+         login-path: /login
 server:
    port: ${SERVER_PORT:8060}
    servlet:
       session:
          cookie:
             name: OAUTH2
-spring:
-   application:
-      name: macula-cloud-oauth2
-macula:
-   cloud:
-      application:
-         group: scmp
-         name: ${spring.application.name}
-      security:
-         login-path: /login
-         oauth2-login: false
 management:
    endpoint:
       health:
@@ -35,3 +33,9 @@ management:
       web:
          exposure:
             include: '*'
+logging:
+   pattern:
+      file: '%d %file:%line %p - %m%n'
+      console: '%d %file:%line %p - %m%n'
+   level:
+      ROOT: INFO

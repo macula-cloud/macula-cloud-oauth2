@@ -7,15 +7,38 @@
 		<groupId>macula-cloud</groupId>
 		<artifactId>macula-cloud-starters</artifactId>
 		<version>2.0.1-SNAPSHOT</version>
-		<relativePath />
 	</parent>
 
 	<artifactId>macula-cloud-oauth2</artifactId>
 	<name>macula-cloud-oauth2</name>
 	<description>Macula Cloud OAuth2 Extension Project</description>
 
+	<properties>
+		<okhttp3.version>4.5.0</okhttp3.version>
+	</properties>
 
 	<dependencies>
+		<dependency>
+			<groupId>com.squareup.okhttp3</groupId>
+			<artifactId>okhttp</artifactId>
+			<version>${okhttp3.version}</version><!--$NO-MVN-MAN-VER$ -->
+		</dependency>
+		<dependency>
+			<groupId>com.alibaba.cloud</groupId>
+			<artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.alibaba.cloud</groupId>
+			<artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.alibaba.cloud</groupId>
+			<artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-undertow</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-oauth2</artifactId>
@@ -106,4 +129,30 @@
 		</plugins>
 	</build>
 
+	<repositories>
+		<repository>
+			<id>infinitus-maven</id>
+			<name>pdsd-nexus</name>
+			<url>https://pdsd-nexus.infinitus.com.cn/repository/infinitus-maven</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
+
+	<distributionManagement>
+		<repository>
+			<id>infinitus-maven</id>
+			<name>ReleasesProxy</name>
+			<url>https://pdsd-nexus.infinitus.com.cn/repository/infinitus-releases</url>
+		</repository>
+		<snapshotRepository>
+			<id>infinitus-maven</id>
+			<name>SnapshotsProxy</name>
+			<url>https://pdsd-nexus.infinitus.com.cn/repository/infinitus-snapshots</url>
+		</snapshotRepository>
+	</distributionManagement>
 </project>
